@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formvalidation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875em;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Form Validation</h2>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error" id="nameError"></span><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError"></span><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+        <span class="error" id="ageError"></span><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        let valid = true;
+
+        // Clear previous errors
+        document.getElementById('nameError').textContent = '';
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('ageError').textContent = '';
+
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const age = document.getElementById('age').value.trim();
+
+        // Validate name
+        if (name === '') {
+            document.getElementById('nameError').textContent = 'Name is required.';
+            valid = false;
+        }
+
+        // Validate email
+        if (email === '') {
+            document.getElementById('emailError').textContent = 'Email is required.';
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            document.getElementById('emailError').textContent = 'Email is invalid.';
+            valid = false;
+        }
+
+        // Validate age
+        if (age === '') {
+            document.getElementById('ageError').textContent = 'Age is required.';
+            valid = false;
+        } else if (isNaN(age) || age <= 0) {
+            document.getElementById('ageError').textContent = 'Age must be a positive number.';
+            valid = false;
+        }
+
+        // Prevent form submission if invalid
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="./index.css" rel="stylesheet">
+    <style>
+        .content{
+            background-color: #f58073;
+        }
+        .box{
+            height: 500px;
+            width: 500px;
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border:none;
+            border-radius: 10px;
+        }
+        textarea{
+            height: 200px;
+            resize: none;
+            width: 400px;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 5px 5px 5px 5px;
+        }
+        .bottomrow{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 400px;
+        }
+        .ind{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .num{
+            color: red;
+        }
+    </style>
+    <script>
+        function change(){
+            let characters = document.getElementById("textbox").value;
+            if(characters.length > 50){
+                characters = ""
+                alert("Character limit Exceeded");
+            }
+            document.getElementById("totalcharacters").innerHTML = characters.length;
+            document.getElementById("remainingcharacters").innerHTML = 50 - characters.length;
+            console.log(characters.length);
+        }
+    </script>
+</head>
+
+<body>
+    <section class="content">
+        <div class="box">
+            <h1>Real-Time Character counter</h1>
+            <div><textarea id="textbox" placeholder="Please write your text here" oninput="change()"></textarea></div>
+            <div class="bottomrow">
+                <div><div class="ind">Total Characters : <div class="num" id="totalcharacters">0</div></div></div>
+                <div><div class="ind">Remaining : <div class="num" id="remainingcharacters">50</div></div></div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
